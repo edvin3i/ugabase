@@ -5,10 +5,18 @@ class Organization(models.Model):
     name = models.CharField(max_length=10)
     description = models.TextField(max_length=1024)
     address = models.TextField(max_length=1024)
-    building = models.TextField(max_length=1024)
+    #building = models.TextField(max_length=1024)
     #key_need_here
 
+class Building(models.Model):
+    organization = models.ForeignKey(Organization)
+    name = models.CharField(max_length=10)
+    description = models.TextField(max_length=1024)
+    address = models.TextField(max_length=1024)
+    inv_number = models.IntegerField()
+
 class AutomationSystem(models.Model):
+    building = models.ForeignKey(Building)
     name = models.CharField(max_length=10)
     description = models.TextField(max_length=1024)
     manufacturer = models.TextField(max_length=1024)
@@ -21,7 +29,7 @@ class AutomationSystem(models.Model):
     documents = models.FileField(upload_to='documents/')
 
 class Device(models.Model):
-    #system = keykeykey
+    automation_system = models.ForeignKey(AutomationSystem)
     name = models.TextField(max_length=1024)
     manufacturer = models.TextField(max_length=1024)
     model = models.TextField(max_length=256)
@@ -98,3 +106,4 @@ class Events(models.Model):
     
     photos = models.ImageField(upload_to='photos/')
     documents = models.FileField(upload_to='documents/')
+
