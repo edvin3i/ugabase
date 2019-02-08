@@ -2,3 +2,4 @@
 *.pyc
 _pycache_/
 .venv/
+ugabase/_pycache_/

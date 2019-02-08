@@ -9,14 +9,14 @@ class Organization(models.Model):
     #key_need_here
 
 class Building(models.Model):
-    organization = models.ForeignKey(Organization)
+    organization = models.ForeignKey(Organization, on_delete=models.CASCADE, blank=True, related_name='organization', default='УА и МО')
     name = models.CharField(max_length=10)
     description = models.TextField(max_length=1024)
     address = models.TextField(max_length=1024)
     inv_number = models.IntegerField()
 
 class AutomationSystem(models.Model):
-    building = models.ForeignKey(Building)
+    building = models.ForeignKey(Building, on_delete=models.CASCADE, blank=True, related_name='building', default='Склад')
     name = models.CharField(max_length=10)
     description = models.TextField(max_length=1024)
     manufacturer = models.TextField(max_length=1024)
@@ -29,7 +29,7 @@ class AutomationSystem(models.Model):
     documents = models.FileField(upload_to='documents/')
 
 class Device(models.Model):
-    automation_system = models.ForeignKey(AutomationSystem)
+    automation_system = models.ForeignKey(AutomationSystem, on_delete=models.CASCADE, blank=True, related_name='automations_system', default='РОФ')
     name = models.TextField(max_length=1024)
     manufacturer = models.TextField(max_length=1024)
     model = models.TextField(max_length=256)
